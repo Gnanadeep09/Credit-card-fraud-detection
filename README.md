@@ -1,113 +1,118 @@
+# Credit Card Fraud Detection
 
-⸻
-
-
-# 💳 Credit Card Fraud Detection
-
-A machine learning project to detect fraudulent credit card transactions using a Random Forest classifier. This project includes data preprocessing, model training, evaluation, and a user-friendly web app built with Streamlit.
+This project detects fraudulent credit card transactions using a machine learning model trained on real transaction data. It includes a Streamlit web application for users to upload data and analyze predictions in real time.
 
 ---
 
-## 📌 Project Features
+## Features
 
-- Detects fraud in credit card transactions
-- Uses a realistic synthetic dataset (under 25MB)
-- Streamlit web app for easy use
+- Detects fraudulent transactions in credit card datasets
+- Trained using Random Forest Classifier
+- Handles imbalanced data with class weighting
+- CSV upload for bulk predictions
+- Streamlit-based interface
 - Google Colab compatible
-- Downloadable prediction results
 
 ---
 
-## 🗂 File Structure
+## Project Structure
 
-├── app.py                        # Streamlit web app
-├── fraud_model.py               # Model training script
-├── credit_card_fraud.csv        # Full dataset
-├── credit_card_fraud_small.csv  # Smaller sample dataset (10k rows)
-├── fraud_model.pkl              # Trained model file
-├── scaler.pkl                   # Preprocessing scaler file
-├── sample_input.csv             # Sample input file for testing
-└── README.md                    # Project documentation
+```
+├── app.py                       # Streamlit web app
+├── fraud_model.py              # Model training script
+├── fraud_model.pkl             # Trained model (Joblib format)
+├── scaler.pkl                  # StandardScaler for preprocessing
+├── credit_card_fraud.csv       # Full dataset
+└── README.md                   # Project documentation
+```
 
 ---
 
-## 🧠 Technologies Used
+## Technologies Used
 
 - Python 3
 - Pandas
-- NumPy
 - Scikit-learn
 - Joblib
 - Streamlit
-- Pyngrok (for Colab use)
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
-### ✅ On Your Computer
+### Local Environment
 
-1. Clone the repo:
-   ```bash
+1. Clone the repository:
+   ```
    git clone https://github.com/your-username/credit-card-fraud-detection.git
    cd credit-card-fraud-detection
+   ```
 
-	2.	Install required packages:
+2. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-pip install -r requirements.txt
+3. Train the model:
+   ```
+   python fraud_model.py
+   ```
 
+4. Launch the web app:
+   ```
+   streamlit run app.py
+   ```
 
-	3.	Train the model:
+---
 
-python fraud_model.py
+### Google Colab Instructions
 
+1. Upload all required files to Colab
+2. Install packages:
+   ```python
+   !pip install streamlit pyngrok joblib
+   ```
 
-	4.	Launch the web app:
+3. Start the app:
+   ```python
+   from pyngrok import ngrok
+   get_ipython().system_raw('streamlit run app.py &')
+   print(ngrok.connect(8501))
+   ```
 
-streamlit run app.py
+---
 
+## Input Format
 
+The input CSV should contain all features used during training. Example format:
 
-⸻
+```csv
+V1,V2,V3,...,V28,Amount
+-1.359807,-0.072781,2.536346,...,-0.021053,149.62
+```
 
-☁️ Run on Google Colab
-	1.	Upload the dataset (credit_card_fraud.csv) and scripts.
-	2.	Install necessary packages:
+No `Class` column is needed during prediction. The app will return predictions and probabilities.
 
-!pip install streamlit pyngrok joblib
+---
 
+## Output Format
 
-	3.	Authenticate ngrok:
+After prediction, the output will include:
 
-!ngrok config add-authtoken YOUR_NGROK_TOKEN
+- Original features
+- `Prediction` (1 = Fraud, 0 = Normal)
+- `Fraud_Probability` (model confidence)
 
+Users can download results directly from the interface.
 
-	4.	Start the app:
+---
 
-get_ipython().system_raw('streamlit run app.py &')
-from pyngrok import ngrok
-print(ngrok.connect(8501))
+## License
 
+This project is intended for educational and academic purposes only.
 
+---
 
-⸻
+## Author
 
-📊 Sample Data
-
-You can use the provided credit_card_fraud_small.csv (10,000 rows) as input for quick testing or upload a custom CSV with similar structure.
-
-⸻
-
-🧾 Output Columns
-
-After prediction:
-	•	Prediction: 1 = Fraud, 0 = Normal
-	•	Fraud_Probability: Confidence score from the model
-
-⸻
-
-📃 License
-
-This project is free to use for academic and educational purposes.
-
-⸻
+Submitted as part of a Machine Learning Internship Project.
